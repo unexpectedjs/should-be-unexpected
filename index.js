@@ -27,33 +27,43 @@ function ShouldFacade(subject) {
 	this.negate = false;
 
 	defineProps(this, [
-		'to',
+		'be', // return this
 		'an',
+		'of',
 		'a',
-		'have',
-		'which',
-		'is',
 		'and',
+		'have',
+		'with',
+		'is',
+		'which',
+		'the',
 		{
 			name: 'not',
 			method: function () {
 				that.negate = !that.negate;
 				return that;
 			}
+		},
+		{
+			name: 'ok',
+			method: function () {
+				return that.unexpectedAssert('[not] to be ok');
+			}
 		}
+
 	]);
 }
 
 ShouldFacade.prototype.unexpectedAssert = function (assertion, args) {
-	args = Array.prototype.slice.call(args);
+	args = args ? Array.prototype.slice.call(args) : [];
 	assertion = expandFlags(assertion, { 'not': this.negate });
 	unexpected.apply(unexpected, [this.subject, assertion].concat(args));
-	this.negate = false;
+	this.negate = false; // reset negation when an assertion has been 
 	return this;
 };
 
-ShouldFacade.prototype.be = function (value) {
-	return this.unexpectedAssert('[not] to be', arguments);
+ShouldFacade.prototype.eql = function (value) {
+	return this.unexpectedAssert('[not] to equal', arguments);
 };
 
 ShouldFacade.prototype.property = function () {
