@@ -1,0 +1,27 @@
+{
+  "name": "should-be-unexpected",
+  "version": "0.0.0",
+  "description": "Should.js emulation layer for Unexpected.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gustavnikolaj/should-be-unexpected.git"
+  },
+  "author": "Gustav Nikolaj <gustavnikolaj@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gustavnikolaj/should-be-unexpected/issues"
+  },
+  "homepage": "https://github.com/gustavnikolaj/should-be-unexpected",
+  "devDependencies": {
+    "mocha": "2.1.0",
+    "should": "4.4.4",
+    "unexpected": "5.1.6"
+  },
+  "peerDependencies": {
+    "unexpected": "5"
+  }
+}
