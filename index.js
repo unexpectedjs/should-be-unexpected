@@ -6,18 +6,20 @@ function expandFlags(pattern, flags) {
     }).trim();
 }
 
+function extend(obj) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    args.forEach(function (source) {
+        if (source) {
+            for (var prop in source) {
+                obj[prop] = source[prop];
+            }
+        }
+    });
+    return obj;
+}
+
 function defineProps(object, props) {
-	props.forEach(function (prop) {
-		if (typeof prop === 'object') {
-			Object.defineProperty(object, prop.name, { get: prop.method });
-		} else {
-			Object.defineProperty(object, prop, {
-				get: function () {
-					return object;
-				}
-			});
-		}
-	});
+	props
 }
 
 function ShouldFacade(subject) {
@@ -26,8 +28,8 @@ function ShouldFacade(subject) {
 	this.subject = subject;
 	this.negate = false;
 
-	defineProps(this, [
-		'be', // return this
+	[
+		'be',
 		'an',
 		'of',
 		'a',
@@ -49,26 +51,42 @@ function ShouldFacade(subject) {
 			method: function () {
 				return that.unexpectedAssert('[not] to be ok');
 			}
+		},
+		{
+			name: 'Number',
+			method: function () {
+				return that.unexpectedAssert('[not] to be a number');
+			}
 		}
-
-	]);
+	].forEach(function (prop) {
+		if (typeof prop === 'object') {
+			Object.defineProperty(that, prop.name, { get: prop.method });
+		} else {
+			Object.defineProperty(that, prop, {
+				get: function () {
+					return that;
+				}
+			});
+		}
+	});
 }
 
-ShouldFacade.prototype.unexpectedAssert = function (assertion, args) {
-	args = args ? Array.prototype.slice.call(args) : [];
-	assertion = expandFlags(assertion, { 'not': this.negate });
-	unexpected.apply(unexpected, [this.subject, assertion].concat(args));
-	this.negate = false; // reset negation when an assertion has been 
-	return this;
-};
+extend(ShouldFacade.prototype, {
+	unexpectedAssert: function (assertion, args) {
+		args = args ? Array.prototype.slice.call(args) : [];
+		assertion = expandFlags(assertion, { 'not': this.negate });
+		unexpected.apply(unexpected, [this.subject, assertion].concat(args));
+		this.negate = false; // reset negation when an assertion has been 
+		return this;
+	},
+	eql: function (value) {
+		return this.unexpectedAssert('[not] to equal', arguments);
+	},
+	property: function () {
+		return this.unexpectedAssert('[not] to have property', arguments);
+	}
+});
 
-ShouldFacade.prototype.eql = function (value) {
-	return this.unexpectedAssert('[not] to equal', arguments);
-};
-
-ShouldFacade.prototype.property = function () {
-	return this.unexpectedAssert('[not] to have property', arguments);
-};
 
 function should(subject) {
 	return new ShouldFacade(subject);
