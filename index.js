@@ -31,14 +31,33 @@ function ShouldFacade(subject) {
 		'an',
 		'a',
 		'have',
-
+		'which',
+		'is',
+		'and',
+		{
+			name: 'not',
+			method: function () {
+				that.negate = !that.negate;
+				return that;
+			}
+		}
 	]);
 }
 
-ShouldFacade.prototype.be = function (value) {
-	var assertion = expandFlags('[not] to be', { 'not': this.negate });
-	unexpected(this.subject, assertion, value)
+ShouldFacade.prototype.unexpectedAssert = function (assertion, args) {
+	args = Array.prototype.slice.call(args);
+	assertion = expandFlags(assertion, { 'not': this.negate });
+	unexpected.apply(unexpected, [this.subject, assertion].concat(args));
+	this.negate = false;
 	return this;
+};
+
+ShouldFacade.prototype.be = function (value) {
+	return this.unexpectedAssert('[not] to be', arguments);
+};
+
+ShouldFacade.prototype.property = function () {
+	return this.unexpectedAssert('[not] to have property', arguments);
 };
 
 function should(subject) {
@@ -47,8 +66,12 @@ function should(subject) {
 
 Object.defineProperty(Object.prototype, 'should', {
 	get: function () {
-		return new ShouldFacade(this);
+		var value = this;
+		if (value instanceof Number || value instanceof String || value instanceof Boolean) {
+			value = value.valueOf();
+		}
+		return new ShouldFacade(value);
 	}
-})
+});
 
 module.exports = should;
