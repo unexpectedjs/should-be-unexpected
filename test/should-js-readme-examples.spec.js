@@ -137,6 +137,11 @@ describe('should.js readme:', function () {
 
                 b.should.be.eql(a);
             });
+            it('.eql should fail with unequal values *', function () {
+                expect(function () {
+                    [1,2,3].should.eql([1,3,2]);
+                }, 'to throw', /^expected \[ 1, 2, 3 \] to satisfy/);
+            });
         });
         describe('.equal(otherValue) and .exactly(otherValue)', function () {
             it('(4).should.equal(4)', function () {
