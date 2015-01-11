@@ -23,6 +23,14 @@ function ShouldFacade(subject) {
 	this.negate = false;
 }
 
+// Defines not
+ShouldFacade.prototype = {
+    get not() {
+        this.negate = !this.negate;
+        return this;
+    }
+};
+
 // Defines noop-words that should just return this
 [
 	'be',
@@ -37,14 +45,6 @@ function ShouldFacade(subject) {
 	'the'
 ].forEach(function (prop) {
 	Object.defineProperty(ShouldFacade.prototype, prop, { get: function () { return this; } });
-});
-
-// Defines not
-Object.defineProperty(ShouldFacade.prototype, 'not', {
-    get: function () {
-        this.negate = !this.negate;
-        return this;
-    }
 });
 
 // Helper method to work with unexpected
@@ -82,6 +82,8 @@ Object.keys(assertions.propertyAssertions).forEach(function (assertion) {
 function should(subject) {
 	return new ShouldFacade(subject);
 }
+
+extend(should, ShouldFacade.prototype);
 
 Object.defineProperty(Object.prototype, 'should', {
 	get: function () {
