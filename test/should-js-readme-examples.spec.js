@@ -269,5 +269,18 @@ describe('should.js readme:', function () {
                 }, 'to throw', 'expected 5 not to be less than 6');
             });
         });
+        describe('.NaN', function () {
+            it('(undefined + 0).should.be.NaN', function () {
+                (undefined + 0).should.be.NaN;
+            });
+            it('(0).should.not.be.NaN', function () {
+                (0).should.not.be.NaN;
+            });
+            it('.NaN should throw *', function () {
+                expect(function () {
+                    (0).should.be.NaN;
+                }, 'to throw', 'expected 0 to be NaN');
+            });
+        });
     });
 });
