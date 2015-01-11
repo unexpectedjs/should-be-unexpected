@@ -282,5 +282,15 @@ describe('should.js readme:', function () {
                 }, 'to throw', 'expected 0 to be NaN');
             });
         });
+        describe('.Infinity', function () {
+            it('(1/0).should.be.Infinity', function () {
+                (1/0).should.be.Infinity;
+            });
+            it('.Infinity should throw *', function () {
+                expect(function () {
+                    (1).should.be.Infinity;
+                }, 'to throw', 'expected 1 to be infinite');
+            });
+        });
     });
 });
