@@ -292,5 +292,19 @@ describe('should.js readme:', function () {
                 }, 'to throw', 'expected 1 to be infinite');
             });
         });
+        describe('.type(str)', function () {
+            it("user.should.be.type('object')", function () {
+                var user = {};
+                user.should.be.type('object');
+            });
+            it("'test'.should.be.type('string')", function () {
+                'test'.should.be.type('string');
+            });
+            it('.type should throw *', function () {
+                expect(function () {
+                    'foo'.should.be.type('number');
+                }, 'to throw', "expected 'foo' to be a number");
+            });
+        });
     });
 });
