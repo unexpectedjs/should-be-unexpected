@@ -18,10 +18,6 @@ function extend(obj) {
     return obj;
 }
 
-function defineProps(object, props) {
-	props
-}
-
 function ShouldFacade(subject) {
 	var that = this;
 
@@ -76,7 +72,7 @@ extend(ShouldFacade.prototype, {
 		args = args ? Array.prototype.slice.call(args) : [];
 		assertion = expandFlags(assertion, { 'not': this.negate });
 		unexpected.apply(unexpected, [this.subject, assertion].concat(args));
-		this.negate = false; // reset negation when an assertion has been 
+		this.negate = false; // reset negation when an assertion has been
 		return this;
 	},
 	eql: function (value) {
