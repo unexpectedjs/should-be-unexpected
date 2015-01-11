@@ -61,7 +61,12 @@ var assertions = require('./lib/assertions');
 
 Object.keys(assertions.methodAssertions).forEach(function (assertion) {
     ShouldFacade.prototype[assertion] = function () {
-        return this.unexpectedAssert(assertions.methodAssertions[assertion], arguments);
+        var value = assertions.methodAssertions[assertion];
+        if (typeof value === 'function') {
+            return value.apply(this, Array.prototype.slice.call(arguments));
+        } else {
+            return this.unexpectedAssert(value, arguments);
+        }
     };
 });
 
