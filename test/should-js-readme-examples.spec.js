@@ -72,7 +72,10 @@ describe('should.js readme:', function () {
                     undefined.should.not.be.ok;
                 }, 'to throw', 'Cannot read property \'should\' of undefined');
             });
+            it('In order to test for null', function () {
+                var err = null;
+                (err === null).should.be.ok;
+            });
         });
-
     });
 });
