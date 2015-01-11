@@ -19,68 +19,58 @@ function extend(obj) {
 }
 
 function ShouldFacade(subject) {
-	var that = this;
-
 	this.subject = subject;
 	this.negate = false;
-
-	[
-		'be',
-		'an',
-		'of',
-		'a',
-		'and',
-		'have',
-		'with',
-		'is',
-		'which',
-		'the',
-		{
-			name: 'not',
-			method: function () {
-				that.negate = !that.negate;
-				return that;
-			}
-		},
-		{
-			name: 'ok',
-			method: function () {
-				return that.unexpectedAssert('[not] to be ok');
-			}
-		},
-		{
-			name: 'Number',
-			method: function () {
-				return that.unexpectedAssert('[not] to be a number');
-			}
-		}
-	].forEach(function (prop) {
-		if (typeof prop === 'object') {
-			Object.defineProperty(that, prop.name, { get: prop.method });
-		} else {
-			Object.defineProperty(that, prop, {
-				get: function () {
-					return that;
-				}
-			});
-		}
-	});
 }
 
-extend(ShouldFacade.prototype, {
-	unexpectedAssert: function (assertion, args) {
-		args = args ? Array.prototype.slice.call(args) : [];
-		assertion = expandFlags(assertion, { 'not': this.negate });
-		unexpected.apply(unexpected, [this.subject, assertion].concat(args));
-		this.negate = false; // reset negation when an assertion has been
-		return this;
-	},
-	eql: function (value) {
-		return this.unexpectedAssert('[not] to equal', arguments);
-	},
-	property: function () {
-		return this.unexpectedAssert('[not] to have property', arguments);
-	}
+// Defines noop-words that should just return this
+[
+	'be',
+	'an',
+	'of',
+	'a',
+	'and',
+	'have',
+	'with',
+	'is',
+	'which',
+	'the'
+].forEach(function (prop) {
+	Object.defineProperty(ShouldFacade.prototype, prop, { get: function () { return this; } });
+});
+
+// Defines not
+Object.defineProperty(ShouldFacade.prototype, 'not', {
+    get: function () {
+        this.negate = !this.negate;
+        return this;
+    }
+});
+
+// Helper method to work with unexpected
+ShouldFacade.prototype.unexpectedAssert = function (assertion, args) {
+	args = args ? Array.prototype.slice.call(args) : [];
+	assertion = expandFlags(assertion, { 'not': this.negate });
+	unexpected.apply(unexpected, [this.subject, assertion].concat(args));
+	this.negate = false; // reset negation when an assertion has been
+	return this;
+};
+
+// Setting up unexpected mappings
+var assertions = require('./lib/assertions');
+
+Object.keys(assertions.methodAssertions).forEach(function (assertion) {
+    ShouldFacade.prototype[assertion] = function () {
+        return this.unexpectedAssert(assertions.methodAssertions[assertion], arguments);
+    };
+});
+
+Object.keys(assertions.propertyAssertions).forEach(function (assertion) {
+    Object.defineProperty(ShouldFacade.prototype, assertion, {
+        get: function () {
+            return this.unexpectedAssert(assertions.propertyAssertions[assertion], arguments);
+        }
+    });
 });
 
 
