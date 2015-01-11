@@ -323,5 +323,19 @@ describe('should.js readme:', function () {
                 }, 'to throw', "expected 'true' to be a Boolean");
             });
         });
+        describe.skip('.arguments', function () {
+            it('args.should.be.arguments', function () {
+                var args = (function(){ return arguments; })(1,2,3);
+                args.should.be.arguments;
+            });
+            it('[].should.not.be.arguments', function () {
+                [].should.not.be.arguments;
+            });
+            it('.arguments should throw *', function () {
+                expect(function () {
+                    [].should.be.arguments;
+                }, 'to throw', 'expected [1,2,3] to be arguments');
+            });
+        });
     });
 });
