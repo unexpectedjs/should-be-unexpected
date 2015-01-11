@@ -114,5 +114,29 @@ describe('should.js readme:', function () {
                 }, 'to throw');
             });
         });
+        describe('.eql(otherValue)', function () {
+            it("({ foo: 'bar' }).should.eql({ foo: 'bar' })", function () {
+                ({ foo: 'bar' }).should.eql({ foo: 'bar' });
+            });
+            it('[1,2,3].should.eql([1,2,3])', function () {
+                [1,2,3].should.eql([1,2,3]);
+            });
+            it("[1, 2, 3].should.eql({ '0': 1, '1': 2, '2': 3 }) (!!!)", function () {
+                // This will work with to satisfy for this example, but not equal, as they
+                // have different constructors. The question here is if we choose to label
+                // this an incompatablilty and try to educate people, or we go with the
+                // solution that provides the least friction.
+                [1, 2, 3].should.eql({ '0': 1, '1': 2, '2': 3 });
+            });
+            it('.eql does not check object prototypes (!!!)', function () {
+                // This fails when .eql is based on to equal, so with this in mind, and the
+                // above, I changed it to to satisfy, as that makes them both pass.
+                var b = {a: 2};
+                var a = Object.create(null);
+                a.a = 2;
+
+                b.should.be.eql(a);
+            });
+        });
     });
 });

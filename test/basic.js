@@ -12,7 +12,7 @@ describe('basic', function () {
         should(3).not.be.eql(4);
         expect(function () {
             (3).should.not.eql(3);
-        }, 'to throw', 'expected 3 not to equal 3');
+        }, 'to throw', 'expected 3 not to satisfy 3');
     });
     it("({ foo: 'bar' }).should.have.property('foo')", function () {
         ({ foo: 'bar' }).should.have.property('foo');
