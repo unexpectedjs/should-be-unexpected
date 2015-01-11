@@ -306,5 +306,22 @@ describe('should.js readme:', function () {
                 }, 'to throw', "expected 'foo' to be a number");
             });
         });
+        describe('.instanceof(constructor) and .instanceOf(constructor)', function () {
+            // This assertion uses 'to be a'. That means that an Array will incorrectly
+            // be called "a Array".
+            it('user.should.be.an.instanceof(User)', function () {
+                function User () {};
+                var user = new User();
+                user.should.be.an.instanceof(User);
+            });
+            it('[].should.be.an.instanceOf(Array)', function () {
+                [].should.be.an.instanceOf(Array);
+            });
+            it('.instanceof should throw *', function () {
+                expect(function () {
+                    'true'.should.be.an.instanceof(Boolean);
+                }, 'to throw', "expected 'true' to be a Boolean");
+            });
+        });
     });
 });
