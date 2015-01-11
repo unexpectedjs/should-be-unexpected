@@ -193,5 +193,19 @@ describe('should.js readme:', function () {
                 }, 'to throw', 'expected \'foobar\' not to match /bar$/\n\nfoobar');
             });
         });
+        describe('.within(from, to)', function () {
+            it('user.age.should.be.within(5, 50)', function () {
+                var user = { age: 24 };
+                user.age.should.be.within(5, 50);
+            });
+            it('(5).should.be.within(5, 10).and.within(5, 5)', function () {
+                (5).should.be.within(5, 10).and.within(5, 5)
+            });
+            it('.within * ', function () {
+                expect(function () {
+                    (3).should.be.within(1,2);
+                }, 'to throw', "expected 3 to be within '1..2'");
+            });
+        });
     });
 });
