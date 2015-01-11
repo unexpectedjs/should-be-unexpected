@@ -392,5 +392,34 @@ describe('should.js readme:', function () {
                 [1, 2].should.not.have.enumerable('length');
             });
         });
+        describe('.property(name[, value])', function () {
+            var user = {
+                name: 'Gustav',
+                age: 15,
+            };
+            it("user.should.have.property('name')", function () {
+                user.should.have.property('name');
+            });
+            it("user.should.have.property('age', 15)", function () {
+                user.should.have.property('age', 15);
+            });
+            it("user.should.not.have.property('rawr')", function () {
+                user.should.not.have.property('rawr');
+            });
+            it("user.should.not.have.property('age', 0)", function () {
+                user.should.not.have.property('age', 0);
+            });
+            it("[1, 2].should.have.property('0', 1)", function () {
+                [1, 2].should.have.property('0', 1);
+            });
+            it(".property changes the chain's object to the given property's value *", function () {
+                ({ foo: 'bar' }).should.have.property('foo').which.is.a.String;
+            });
+            it('.property should fail *', function () {
+                expect(function () {
+                    user.should.have.property('rawr');
+                }, 'to throw', "expected { name: 'Gustav', age: 15 } to have property 'rawr'");
+            });
+        });
     });
 });
