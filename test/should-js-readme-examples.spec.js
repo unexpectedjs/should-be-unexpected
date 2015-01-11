@@ -365,5 +365,32 @@ describe('should.js readme:', function () {
                 }, 'to throw', "expected 'string' to be a number");
             });
         });
+        describe.skip('.enumerable(name[, value])', function () {
+            var user = {
+                name: 'Gustav',
+                age: 15,
+            };
+            it.skip("'asd'.should.not.have.enumerable('0');", function () {
+                'asd'.should.not.have.enumerable('0');
+            });
+            it("user.should.have.enumerable('name');", function () {
+                user.should.have.enumerable('name');
+            });
+            it("user.should.have.enumerable('age', 15);", function () {
+                user.should.have.enumerable('age', 15);
+            });
+            it("user.should.not.have.enumerable('rawr');", function () {
+                user.should.not.have.enumerable('rawr');
+            });
+            it("user.should.not.have.enumerable('age', 0);", function () {
+                user.should.not.have.enumerable('age', 0);
+            });
+            it("[1, 2].should.have.enumerable('0', 1);", function () {
+                [1, 2].should.have.enumerable('0', 1);
+            });
+            it("[1, 2].should.have.enumerable('length');", function () {
+                [1, 2].should.not.have.enumerable('length');
+            });
+        });
     });
 });
