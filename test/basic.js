@@ -19,11 +19,6 @@ describe('basic', function () {
     	expect(function () {
     		({ foo: 'bar' }).should.have.property('bar');
     	}, 'to throw', "expected { foo: 'bar' } to have property 'bar'");
-
-    	({ foo: 'bar' }).should.have.property('foo').and.not.have.property('bar');
-    	expect(function () {
-    		({ foo: 'bar', bar: 'foo' }).should.have.property('foo').and.not.have.property('bar');
-    	}, 'to throw', "expected { foo: 'bar', bar: 'foo' } not to have property 'bar'");
     });
     it('true.should.be.ok', function () {
     	true.should.be.ok;
