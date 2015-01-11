@@ -217,5 +217,31 @@ describe('should.js readme:', function () {
                 }, 'to throw', 'expected 99 to be close to 100 (epsilon: 1e-1)');
             });
         });
+        describe('.above(num) and .greaterThan(num)', function () {
+            var user = { age: 24 };
+            it('user.age.should.be.above(5)', function () {
+                user.age.should.be.above(5);
+            });
+            it('user.age.should.not.be.above(100)', function () {
+                user.age.should.not.be.above(100);
+            });
+            it('(5).should.be.above(0)', function () {
+                (5).should.be.above(0);
+            });
+            it('(5).should.not.be.above(5)', function () {
+                (5).should.not.be.above(5);
+            });
+            it('(5).should.not.be.greaterThan(5)', function () {
+                (5).should.not.be.greaterThan(5);
+            });
+            it('(5).should.be.greaterThan(0)', function () {
+                (5).should.be.greaterThan(0);
+            });
+            it('.greaterThan should fail *', function () {
+                expect(function () {
+                    (5).should.be.greaterThan(6);
+                }, 'to throw', 'expected 5 to be greater than 6');
+            });
+        });
     });
 });
