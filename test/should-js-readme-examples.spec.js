@@ -138,5 +138,29 @@ describe('should.js readme:', function () {
                 b.should.be.eql(a);
             });
         });
+        describe('.equal(otherValue) and .exactly(otherValue)', function () {
+            it('(4).should.equal(4)', function () {
+                (4).should.equal(4);
+            });
+            it("'test'.should.equal('test')", function () {
+                'test'.should.equal('test');
+            });
+            it('[1,2,3].should.not.equal([1,2,3])', function () {
+                [1,2,3].should.not.equal([1,2,3]);
+            });
+            it('(4).should.be.exactly(4)', function () {
+                (4).should.be.exactly(4);
+            });
+            it('.equal should throw *', function () {
+                expect(function () {
+                    (3).should.be.equal(4);
+                }, 'to throw', 'expected 3 to be 4');
+            });
+            it('.exactly should throw *', function () {
+                expect(function () {
+                    (3).should.be.exactly(4);
+                }, 'to throw', 'expected 3 to be 4');
+            });
+        });
     });
 });
