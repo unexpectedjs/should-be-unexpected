@@ -167,5 +167,18 @@ describe('should.js readme:', function () {
                 }, 'to throw', 'expected 3 to be 4');
             });
         });
+        describe('.startWith(str)', function () {
+            it("'foobar'.should.startWith('foo')", function () {
+                'foobar'.should.startWith('foo');
+            });
+            it("'foobar'.should.not.startWith('bar')", function () {
+                'foobar'.should.not.startWith('bar');
+            });
+            it('.startWith should fail *', function () {
+                expect(function () {
+                    'foobar'.should.not.startWith('foo');
+                }, 'to throw', "expected 'foobar' not to match /^foo/\n\nfoobar");
+            });
+        });
     });
 });
