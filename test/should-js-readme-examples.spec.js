@@ -180,5 +180,18 @@ describe('should.js readme:', function () {
                 }, 'to throw', "expected 'foobar' not to match /^foo/\n\nfoobar");
             });
         });
+        describe('.endWith(str)', function () {
+            it("'foobar'.should.endWith('bar')", function () {
+                'foobar'.should.endWith('bar');
+            });
+            it("'foobar'.should.not.endWith('foo');", function () {
+                'foobar'.should.not.endWith('foo');
+            });
+            it('.endWith should throw', function () {
+                expect(function () {
+                    'foobar'.should.not.endWith('bar');
+                }, 'to throw', 'expected \'foobar\' not to match /bar$/\n\nfoobar');
+            });
+        });
     });
 });
