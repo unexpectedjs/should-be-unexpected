@@ -63,6 +63,5 @@
     "disallowNewlineBeforeBlockStatements": true,
     "requireCamelCaseOrUpperCaseIdentifiers": true,
     "requireDotNotation": true,
-    "validateParameterSeparator": ", ",
-    "safeContextKeyword": ["that"]
+    "validateParameterSeparator": ", "
 }
