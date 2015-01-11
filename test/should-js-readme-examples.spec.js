@@ -337,5 +337,33 @@ describe('should.js readme:', function () {
                 }, 'to throw', 'expected [1,2,3] to be arguments');
             });
         });
+        describe('.Object, .Number, .Array, .Boolean, .Function, .String, .Error', function () {
+            it('({}).should.be.an.Object', function () {
+                ({}).should.be.an.Object;
+            });
+            it('(1).should.be.a.Number', function () {
+                (1).should.be.a.Number;
+            });
+            it('[].should.be.an.Array.and.an.Object', function () {
+                [].should.be.an.Array.and.an.Object;
+            });
+            it('(true).should.be.a.Boolean', function () {
+                (true).should.be.a.Boolean;
+            });
+            it("'.should.be.a.String", function () {
+                ''.should.be.a.String;
+            });
+            it('(function () {}).should.be.a.Function *', function () {
+                (function () {}).should.be.a.Function;
+            });
+            it('(new Error()).should.be.an.Error *', function () {
+                (new Error()).should.be.an.Error;
+            });
+            it('.Number should throw *', function () {
+                expect(function () {
+                    'string'.should.be.a.Number;
+                }, 'to throw', "expected 'string' to be a number");
+            });
+        });
     });
 });
