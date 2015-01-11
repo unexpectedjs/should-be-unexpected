@@ -207,5 +207,15 @@ describe('should.js readme:', function () {
                 }, 'to throw', "expected 3 to be within '1..2'");
             });
         });
+        describe('.approximately(num, delta)', function () {
+            it('(99.99).should.be.approximately(100, 0.1)', function () {
+                (99.99).should.be.approximately(100, 0.1);
+            });
+            it('.approximately *', function () {
+                expect(function () {
+                    (99).should.be.approximately(100, 0.1);
+                }, 'to throw', 'expected 99 to be close to 100 (epsilon: 1e-1)');
+            });
+        });
     });
 });
