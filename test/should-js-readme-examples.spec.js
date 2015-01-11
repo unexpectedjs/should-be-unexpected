@@ -42,7 +42,7 @@ describe('should.js readme:', function () {
                 }, 1);
             };
 
-            someAsyncTask(foo, function(err, result){
+            someAsyncTask(foo, function (err, result) {
                 should.not.exist(err);
                 should.exist(result);
                 result.bar.should.equal(foo);
