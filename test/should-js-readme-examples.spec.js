@@ -425,5 +425,28 @@ describe('should.js readme:', function () {
                 }, 'to throw', "expected { name: 'Gustav', age: 15 } to have property 'rawr'");
             });
         });
+        describe('.properties(...)', function () {
+            var user = {
+                name: 'denis',
+                age: 24
+            };
+            it("user.should.have.properties('name', 'age')", function () {
+                user.should.have.properties('name', 'age');
+            });
+            it("user.should.have.properties(['name', 'age'])", function () {
+                user.should.have.properties(['name', 'age']);
+            });
+            it("user.should.have.properties({ name: 'denis', age: 24 });", function () {
+                user.should.have.properties({
+                    name: 'denis',
+                    age: 24
+                });
+            });
+            it('.properties should fail', function () {
+                expect(function () {
+                    user.should.have.properties('foo', 'bar');
+                }, 'to throw', "expected { name: 'denis', age: 24 } to have properties [ 'foo', 'bar' ]");
+            });
+        });
     });
 });
