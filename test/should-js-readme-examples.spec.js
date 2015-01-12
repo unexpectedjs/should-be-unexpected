@@ -523,5 +523,26 @@ describe('should.js readme:', function () {
                 }, 'to throw', 'expected {} to have keys \'key\'')
             });
         });
+        describe.skip('.propertyByPath([name1, ...]) or .propertyByPath(name1, name2, ...)', function () {
+            // This could be implemented by recursively applying .property
+            // exploiting the fact that it already chains and changes the
+            // subject. But it will provide worse errors.
+            // Can it be implemented with to satisfy?
+            var obj = { foo: 'bar', baz: 'raz', zad: { a: 10 } };
+            it("obj.should.have.propertyByPath('zad', 'a')", function () {
+                obj.should.have.propertyByPath('zad', 'a');
+            });
+            it('obj.should.not.have.propertyByPath(0, 1, 2)', function () {
+                obj.should.not.have.propertyByPath(0, 1, 2);
+            });
+            it(".propertyByPath changes the chain's object to the given property's value if found *", function () {
+                obj.should.have.propertyByPath('zad', 'a').which.is.a.Number;
+            });
+            it(".propertyByPath should fail *", function () {
+                expect(function () {
+                    obj.should.have.propertyByPath('zad', 'b');
+                }, 'to throw', '');
+            });
+        });
     });
 });
