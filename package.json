@@ -26,5 +26,8 @@
   },
   "peerDependencies": {
     "unexpected": "5"
+  },
+  "dependencies": {
+    "uninspected": "1.3.0"
   }
 }

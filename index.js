@@ -5,6 +5,10 @@ function should(subject) {
     return new ShouldFacade(subject);
 }
 
+var uninspected = require('uninspected');
+uninspected.outputFormat = 'text';
+should.format = uninspected.inspect;
+
 extend(should, ShouldFacade.prototype);
 
 Object.defineProperty(Object.prototype, 'should', {
