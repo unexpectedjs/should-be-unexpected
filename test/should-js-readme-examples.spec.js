@@ -5,6 +5,8 @@ var should = require('../');
  * Negative tests are added to make sure they throw when failing,
  * for completeness sake. The additions are marked with an asterisk (*)
  * at the end of the name.
+ *
+ * Incompatabilities are marked with three exclamation marks. (!!!)
  */
 
 describe('should.js readme:', function () {
@@ -122,25 +124,27 @@ describe('should.js readme:', function () {
                 [1,2,3].should.eql([1,2,3]);
             });
             it("[1, 2, 3].should.eql({ '0': 1, '1': 2, '2': 3 }) (!!!)", function () {
-                // This will work with to satisfy for this example, but not equal, as they
-                // have different constructors. The question here is if we choose to label
-                // this an incompatablilty and try to educate people, or we go with the
-                // solution that provides the least friction.
-                [1, 2, 3].should.eql({ '0': 1, '1': 2, '2': 3 });
+                // INCOMPATABILITY: SEE DOCUMENTATION
+                expect(function () {
+                    [1, 2, 3].should.eql({ '0': 1, '1': 2, '2': 3 });
+                }, 'to throw', "expected [ 1, 2, 3 ] to equal { '0': 1, '1': 2, '2': 3 }\n\nMismatching constructors Array should be Object");
             });
-            it('.eql does not check object prototypes (!!!)', function () {
-                // This fails when .eql is based on to equal, so with this in mind, and the
-                // above, I changed it to to satisfy, as that makes them both pass.
+            it.skip('.eql does not check object prototypes (!!!)', function () {
+                // Fails due to a bug in unexpected when inspecting
+                // Objects created by Object.create(null)
+
+                // INCOMPATABILITY: SEE DOCUMENTATION
                 var b = {a: 2};
                 var a = Object.create(null);
                 a.a = 2;
-
-                b.should.be.eql(a);
+                expect(function () {
+                    b.should.be.eql(a);
+                }, 'to throw', '');
             });
             it('.eql should fail with unequal values *', function () {
                 expect(function () {
                     [1,2,3].should.eql([1,3,2]);
-                }, 'to throw', /^expected \[ 1, 2, 3 \] to satisfy/);
+                }, 'to throw', /^expected \[ 1, 2, 3 \] to equal/);
             });
         });
         describe('.equal(otherValue) and .exactly(otherValue)', function () {
