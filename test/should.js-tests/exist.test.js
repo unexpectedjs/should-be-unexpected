@@ -29,7 +29,7 @@ function err_should_not_exist(obj) {
     }, 'expected ' + should.format(obj) + ' to be undefined');
 }
 
-describe('exist', function() {
+describe.skip('exist', function() {
 
   // static should.exist() pass,
   it('test static should.exist() pass w/ bool', function() {
