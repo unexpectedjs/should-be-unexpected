@@ -30,7 +30,7 @@ function makeBlock(f) {
   };
 }
 
-describe('assert', function() {
+describe.skip('assert', function() {
   it('.ok', function() {
     assert.throws(makeBlock(assert.ok, false), assert.AssertionError, 'ok(false)');
 
