@@ -581,5 +581,38 @@ describe('should.js readme:', function () {
                 }, 'to throw', 'expected [ 1, 2, 3 ] to contain 4');
             });
         });
+        describe.skip('.containDeep(otherValue)', function () {
+            it("'hello boy'.should.containDeep('boy')", function () {
+                'hello boy'.should.containDeep('boy');
+            });
+            it('[1,2,3].should.containDeep([3])', function () {
+                [1,2,3].should.containDeep([3]);
+            });
+            it('[1,2,3].should.containDeep([1, 3])', function () {
+                [1,2,3].should.containDeep([1, 3]);
+            });
+            it('[1,2,3].should.not.containDeep([3, 1])', function () {
+                [1,2,3].should.not.containDeep([3, 1]);
+            });
+            it('complex objects .containDeep', function () {
+                ({ a: { b: 10 }, b: { c: 10, d: 11, a: { b: 10, c: 11} }}).should
+                    .containDeep({ a: { b: 10 }, b: { c: 10, a: { c: 11 }}});
+            });
+            it('[1, 2, 3, { a: { b: { d: 12 }}}].should.containDeep([{ a: { b: {d: 12}}}])', function () {
+                [1, 2, 3, { a: { b: { d: 12 }}}].should.containDeep([{ a: { b: {d: 12}}}]);
+            });
+            it('[[1],[2],[3]].should.containDeep([[3]])', function () {
+                [[1],[2],[3]].should.containDeep([[3]]);
+            });
+            it('[[1],[2],[3, 4]].should.containDeep([[3]])', function () {
+                [[1],[2],[3, 4]].should.containDeep([[3]]);
+            });
+            it("[{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep([{a: 'a'}])", function () {
+                [{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep([{a: 'a'}]);
+            });
+            it("[{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep([{b: 'b'}])", function () {
+                [{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep([{b: 'b'}]);
+            });
+        });
     });
 });
