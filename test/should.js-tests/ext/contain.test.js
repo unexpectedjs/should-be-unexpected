@@ -1,7 +1,7 @@
 var err = require('../util').err;
 var should = require('../../../');
 
-describe('property', function() {
+describe('contain', function() {
 
   it('test containEql', function() {
     'hello boy'.should.containEql('boy');
