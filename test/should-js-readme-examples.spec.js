@@ -690,7 +690,7 @@ describe('should.js readme:', function () {
                 });
             });
         });
-        describe('.throw() and .throwError()', function () {
+        describe.skip('.throw() and .throwError()', function () {
             it('Assert an exception is thrown', function () {
                 (function(){
                     throw new Error('fail');
