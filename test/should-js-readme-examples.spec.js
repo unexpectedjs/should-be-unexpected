@@ -517,7 +517,7 @@ describe('should.js readme:', function () {
                 //fail AssertionError: expected {} to have key 'key'missing keys: 'key'
                 expect(function () {
                     ({}).should.have.keys('key');
-                }, 'to throw', 'expected {} to have keys \'key\'')
+                }, 'to throw', 'expected {} to only have keys \'key\'')
             });
         });
         describe.skip('.propertyByPath([name1, ...]) or .propertyByPath(name1, name2, ...)', function () {
