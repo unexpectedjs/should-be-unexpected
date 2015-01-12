@@ -461,6 +461,9 @@ describe('should.js readme:', function () {
             it('({ length: 10}).should.have.length(10)', function () {
                 ({ length: 10}).should.have.length(10);
             });
+            it(".lengthOf change the chain's object to the given length value", function () {
+                [1,2,3].should.have.length(3).and.be.a.Number;
+            });
             it('.length should throw *', function () {
                 expect(function () {
                     user.pets.should.have.length(42);
