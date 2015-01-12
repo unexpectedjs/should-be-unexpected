@@ -484,5 +484,26 @@ describe('should.js readme:', function () {
                 }, 'to throw', "expected {} to have own property 'foo'");
             });
         });
+        describe('.empty', function () {
+            it('[].should.be.empty', function () {
+                [].should.be.empty;
+            });
+            it("''.should.be.empty", function () {
+                ''.should.be.empty;
+            });
+            it('({}).should.be.empty', function () {
+                ({}).should.be.empty;
+            });
+            it('arguments.should.be.empty', function () {
+                (function() {
+                    arguments.should.be.empty;
+                })();
+            });
+            it('.empty should fail *', function () {
+                expect(function () {
+                    [1].should.be.empty;
+                }, 'to throw', 'expected [ 1 ] to be empty');
+            });
+        });
     });
 });
