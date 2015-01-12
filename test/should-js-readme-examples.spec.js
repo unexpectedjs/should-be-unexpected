@@ -470,5 +470,19 @@ describe('should.js readme:', function () {
                 }, 'to throw', "expected [ 'tobi', 'loki', 'jane', 'bandit', 'garfield' ] to have length 42");
             });
         });
+        describe('.ownProperty(str) and .hasOwnProperty(str)', function () {
+            it("({ foo: 'bar' }).should.have.ownProperty('foo').equal('bar')", function () {
+                ({ foo: 'bar' }).should.have.ownProperty('foo').equal('bar');
+            });
+            it("({ foo: 'bar' }).should.have.hasOwnProperty('foo') *", function () {
+                ({ foo: 'bar' }).should.have.hasOwnProperty('foo');
+            });
+            it('.ownProperty should throw *', function () {
+                expect(function () {
+                    var obj = Object.create({ foo: 'bar' });
+                    obj.should.have.ownProperty('foo');
+                }, 'to throw', "expected {} to have own property 'foo'");
+            });
+        });
     });
 });
