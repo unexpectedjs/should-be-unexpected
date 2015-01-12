@@ -129,17 +129,14 @@ describe('should.js readme:', function () {
                     [1, 2, 3].should.eql({ '0': 1, '1': 2, '2': 3 });
                 }, 'to throw', "expected [ 1, 2, 3 ] to equal { '0': 1, '1': 2, '2': 3 }\n\nMismatching constructors Array should be Object");
             });
-            it.skip('.eql does not check object prototypes (!!!)', function () {
-                // Fails due to a bug in unexpected when inspecting
-                // Objects created by Object.create(null)
-
+            it('.eql does not check object prototypes (!!!)', function () {
                 // INCOMPATABILITY: SEE DOCUMENTATION
                 var b = {a: 2};
                 var a = Object.create(null);
                 a.a = 2;
                 expect(function () {
                     b.should.be.eql(a);
-                }, 'to throw', '');
+                }, 'to throw', 'expected { a: 2 } to equal { a: 2 }\n\nMismatching constructors Object should be undefined');
             });
             it('.eql should fail with unequal values *', function () {
                 expect(function () {
