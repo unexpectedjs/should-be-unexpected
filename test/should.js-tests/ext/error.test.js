@@ -1,7 +1,7 @@
 var err = require('../util').err,
 	should = require('../../../');
 
-describe('error', function() {
+describe.skip('error', function() {
   it('test throw()', function() {
     err(function() {
       'a'.should.throw();
