@@ -690,5 +690,51 @@ describe('should.js readme:', function () {
                 });
             });
         });
+        describe('.throw() and .throwError()', function () {
+            it('Assert an exception is thrown', function () {
+                (function(){
+                    throw new Error('fail');
+                }).should.throw();
+            });
+            describe('Assert an exception is not thrown', function () {
+                it('.throw', function () {
+                    (function(){}).should.not.throw();
+                });
+                it('.throwError', function () {
+                    (function(){}).should.not.throwError();
+                });
+            });
+            it('Assert exception message matches string', function () {
+                (function(){
+                    throw new Error('fail');
+                }).should.throw('fail');
+            });
+            it('Assert error message matches regexp', function () {
+                (function(){
+                    throw new Error('failed to foo');
+                }).should.throw(/^fail/);
+            });
+            describe('Error properties to match some other properties (used .match)', function () {
+                var error = new Error();
+                error.a = 10;
+                it('case #1', function () {
+                    (function(){ throw error; }).should.throw({ a: 10 });
+                });
+                it('case #2', function () {
+                    (function(){ throw error; }).should.throw(Error, { a: 10 });
+                });
+            });
+            describe('If you need to pass arguments and/or context to execute function use Function#bind', function () {
+                function isPositive(n) {
+                    if(n <= 0) throw new Error('Given number is not positive')
+                }
+                it('should not throw', function () {
+                    isPositive.bind(null, 10).should.not.throw();
+                });
+                it('should throw', function () {
+                    isPositive.bind(null, -10).should.throw();
+                });
+            });
+        });
     });
 });
