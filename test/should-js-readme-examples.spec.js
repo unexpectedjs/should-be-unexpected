@@ -505,5 +505,23 @@ describe('should.js readme:', function () {
                 }, 'to throw', 'expected [ 1 ] to be empty');
             });
         });
+        describe('.keys([key1, key2, ...]) and .keys(key1, key2, ...) and .key(key)', function () {
+            var obj = { foo: 'bar', baz: 'raz' };
+            it("obj.should.have.keys('foo', 'baz')", function () {
+                obj.should.have.keys('foo', 'baz');
+            });
+            it("obj.should.have.keys(['foo', 'baz'])", function () {
+                obj.should.have.keys(['foo', 'baz']);
+            });
+            it('({}).should.have.keys()', function () {
+                ({}).should.have.keys();
+            });
+            it("should fail: ({}).should.have.keys('key')", function () {
+                //fail AssertionError: expected {} to have key 'key'missing keys: 'key'
+                expect(function () {
+                    ({}).should.have.keys('key');
+                }, 'to throw', 'expected {} to have keys \'key\'')
+            });
+        });
     });
 });
