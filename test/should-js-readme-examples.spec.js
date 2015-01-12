@@ -87,7 +87,7 @@ describe('should.js readme:', function () {
             it('false.should.be.ok should throw *', function () {
                 expect(function () {
                     false.should.be.ok;
-                }, 'to throw', 'expected false to be ok');
+                }, 'to throw', 'expected false to be truthy');
             });
         });
         describe('.true', function () {

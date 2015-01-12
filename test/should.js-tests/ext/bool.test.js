@@ -9,11 +9,11 @@ describe('bool', function() {
 
     err(function(){
       'test'.should.be.true;
-    }, "expected 'test' to be true")
+    }, "expected 'test' to equal true")
 
     err(function(){
       true.should.not.be.true;
-    }, "expected true not to be true")
+    }, "expected true not to equal true")
   });
 
   it('test false', function() {
@@ -23,11 +23,11 @@ describe('bool', function() {
 
     err(function(){
       ''.should.be.false;
-    }, "expected '' to be false")
+    }, "expected '' to equal false")
 
     err(function(){
       false.should.not.be.false;
-    }, "expected false not to be false")
+    }, "expected false not to equal false")
   });
 
   it('test ok', function() {

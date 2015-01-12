@@ -26,7 +26,7 @@ describe('basic', function () {
 
         expect(function () {
             true.should.not.be.ok;
-        }, 'to throw', "expected true not to be ok");
+        }, 'to throw', "expected true not to be truthy");
     });
     it('(3).should.be.a.Number', function () {
         (3).should.be.a.Number;
