@@ -37,28 +37,32 @@ describe('eql', function() {
     date.should.equal(date);
   });
 
-  it('test .equal()', function() {
+  it.skip('test .equal()', function() {
     var foo;
     should.equal(undefined, foo);
   });
 
   it('should allow to test with prototypes', function() {
+    // The commented out parts of this test is removed because this is
+    // an intentional incompatability. Unexpected always runs in a mode
+    // that is equal to `should.config.checkProtoEql = true;`
     var b = {a: 2};
     var a = Object.create(null);
     a.a = 2;
 
-    b.should.be.eql(a);
+    // b.should.be.eql(a);
 
-    should.config.checkProtoEql = true;
+    // should.config.checkProtoEql = true;
 
     err(function() {
       b.should.be.eql(a);
-    }, 'expected { a: 2 } to equal { a: 2 } (because A and B have different prototypes)');
+    }, 'expected { a: 2 } to equal { a: 2 }\n\nMismatching constructors Object should be undefined');
+    // }, 'expected { a: 2 } to equal { a: 2 } (because A and B have different prototypes)');
 
-    should.config.checkProtoEql = false;
+    // should.config.checkProtoEql = false;
   });
 
-  it('should allow to use old equal function', function() {
+  it.skip('should allow to use old equal function', function() {
     var a = { a: 10};
     var b = { a: '10'};
 
