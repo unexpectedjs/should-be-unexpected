@@ -544,5 +544,42 @@ describe('should.js readme:', function () {
                 }, 'to throw', '');
             });
         });
+        describe('.containEql(otherValue)', function () {
+            it("'hello boy'.should.containEql('boy')", function () {
+                'hello boy'.should.containEql('boy');
+            });
+            it('[1,2,3].should.containEql(3)', function () {
+                [1,2,3].should.containEql(3);
+            });
+            it('[[1],[2],[3]].should.containEql([3])', function () {
+                [[1],[2],[3]].should.containEql([3]);
+            });
+            it('[[1],[2],[3, 4]].should.not.containEql([3])', function () {
+                [[1],[2],[3, 4]].should.not.containEql([3]);
+            });
+            it('({ b: 10 }).should.containEql({ b: 10 }) (!!!)', function () {
+                // This fails as contains is not defined for objects in unexpected.
+                expect(function () {
+                    ({ b: 10 }).should.containEql({ b: 10 });
+                }, 'to throw', 'The assertion "to contain" is not defined for the type "object",\nbut it is defined for these types: "string", "arrayLike"');
+            });
+            it('([1, 2, { a: 10 }]).should.containEql({ a: 10 })', function () {
+                ([1, 2, { a: 10 }]).should.containEql({ a: 10 });
+            });
+            it('[1, 2, 3].should.not.containEql({ a: 1 })', function () {
+                [1, 2, 3].should.not.containEql({ a: 1 });
+            });
+            it("[{a: 'a'}, {b: 'b', c: 'c'}].should.containEql({a: 'a'})", function () {
+                [{a: 'a'}, {b: 'b', c: 'c'}].should.containEql({a: 'a'});
+            });
+            it("[{a: 'a'}, {b: 'b', c: 'c'}].should.not.containEql({b: 'b'})", function () {
+                [{a: 'a'}, {b: 'b', c: 'c'}].should.not.containEql({b: 'b'});
+            });
+            it('.containEql should throw *', function () {
+                expect(function () {
+                    [1,2,3].should.containEql(4);
+                }, 'to throw', 'expected [ 1, 2, 3 ] to contain 4');
+            });
+        });
     });
 });

@@ -19,3 +19,13 @@ should.config.checkProtoEql = true;
 
 Unexpected behaves as `checkProtoEql` is true per default, and it
 cannot be changed. This is a very concious choice.
+
+### 2. .containEql(otherValue)
+
+The following would work in should.js.
+```javascript
+({ b: 10 }).should.containEql({ b: 10 });
+```
+
+But it doesn't in unexpected, as it does not define the assertion
+'to contain' for the object type.
