@@ -323,7 +323,7 @@ describe('should.js readme:', function () {
                 }, 'to throw', "expected 'true' to be a Boolean");
             });
         });
-        describe.skip('.arguments', function () {
+        describe('.arguments', function () {
             it('args.should.be.arguments', function () {
                 var args = (function(){ return arguments; })(1,2,3);
                 args.should.be.arguments;
@@ -334,7 +334,7 @@ describe('should.js readme:', function () {
             it('.arguments should throw *', function () {
                 expect(function () {
                     [].should.be.arguments;
-                }, 'to throw', 'expected [1,2,3] to be arguments');
+                }, 'to throw', 'expected [] to be an arguments');
             });
         });
         describe('.Object, .Number, .Array, .Boolean, .Function, .String, .Error', function () {
