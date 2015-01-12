@@ -448,5 +448,24 @@ describe('should.js readme:', function () {
                 }, 'to throw', "expected { name: 'denis', age: 24 } to have properties [ 'foo', 'bar' ]");
             });
         });
+        describe('.length(number) and .lengthOf(number)', function () {
+            var user = {
+                pets: ['tobi', 'loki', 'jane', 'bandit', 'garfield']
+            };
+            it('user.pets.should.have.length(5)', function () {
+                user.pets.should.have.length(5);
+            });
+            it('user.pets.should.have.a.lengthOf(5)', function () {
+                user.pets.should.have.a.lengthOf(5);
+            });
+            it('({ length: 10}).should.have.length(10)', function () {
+                ({ length: 10}).should.have.length(10);
+            });
+            it('.length should throw *', function () {
+                expect(function () {
+                    user.pets.should.have.length(42);
+                }, 'to throw', "expected [ 'tobi', 'loki', 'jane', 'bandit', 'garfield' ] to have length 42");
+            });
+        });
     });
 });
