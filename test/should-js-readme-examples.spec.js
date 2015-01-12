@@ -614,5 +614,61 @@ describe('should.js readme:', function () {
                 [{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep([{b: 'b'}]);
             });
         });
+        describe.skip('.match(otherValue)', function () {
+            describe('Given: String, otherValue: regexp', function () {
+                it('username.should.match(/^\w+$/)', function () {
+                    var username = 'foo';
+                    username.should.match(/^\w+$/);
+                });
+            });
+            describe('Given: Array, otherValue: regexp  - assert each value match to regexp.', function () {
+                it("['a', 'b', 'c'].should.match(/[a-z]/)", function () {
+                    ['a', 'b', 'c'].should.match(/[a-z]/);
+                });
+                it("['a', 'b', 'c'].should.not.match(/[d-z]/)", function () {
+                    ['a', 'b', 'c'].should.not.match(/[d-z]/);
+                });
+            });
+            describe("Given: Object, otherValue: regexp - assert own property's values to match regexp.", function () {
+                it("({ a: 'foo', c: 'barfoo' }).should.match(/foo$/)", function () {
+                    ({ a: 'foo', c: 'barfoo' }).should.match(/foo$/);
+                });
+                it("({ a: 'a' }).should.not.match(/^http/)", function () {
+                    ({ a: 'a' }).should.not.match(/^http/);
+                });
+            });
+            describe('Given: Anything, otherValue: function - assert if given value matched to function.', function () {
+                // Function can use .should inside or return 'true' or
+                // 'false', in all other cases it do nothing. If you
+                // return value that return assertion, you will
+                // receive better error messages.
+                it('(5).should.match(function(n) { return n > 0', function () {
+                    (5).should.match(function(n) { return n > 0; });
+                });
+                it('(5).should.not.match(function(n) { return n < 0', function () {
+                    (5).should.not.match(function(n) { return n < 0; });
+                });
+                it('(5).should.not.match(function(it) { it.should.be.an.Array', function () {
+                    (5).should.not.match(function(it) { it.should.be.an.Array; });
+                });
+                it('(5).should.match(function(it) { return it.should.be.a.Number', function () {
+                    (5).should.match(function(it) { return it.should.be.a.Number; });
+                });
+            });
+            describe('Given: object, otherValue: another object - assert that object properties match to properties of another object in meaning that describe above cases.', function () {
+                it('Complex object example with match #1', function () {
+                    ({ a: 10, b: 'abc', c: { d: 10 }, d: 0 }).should
+                        .match({ a: 10, b: /c$/, c: function(it) { return it.should.have.property('d', 10); }});
+                });
+                it('Complex object example with match #2', function () {
+                    [10, 'abc', { d: 10 }, 0].should
+                        .match({ '0': 10, '1': /c$/, '2': function(it) { return it.should.have.property('d', 10); } });
+                });
+                it('Complex object example with match #3', function () {
+                    [10, 'abc', { d: 10 }, 0].should
+                        .match([10, /c$/, function(it) { return it.should.have.property('d', 10); }]);
+                });
+            });
+        });
     });
 });
