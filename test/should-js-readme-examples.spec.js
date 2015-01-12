@@ -670,5 +670,25 @@ describe('should.js readme:', function () {
                 });
             });
         });
+        describe.skip('.matchEach()', function () {
+            describe('If otherValue is RegExp, then each property value checked to match it', function () {
+                it("(['a', 'b', 'c']).should.matchEach(/[a-c]/)", function () {
+                    (['a', 'b', 'c']).should.matchEach(/[a-c]/);
+                });
+            });
+            describe('If otherValue is Function, then check each property value and key matched it', function () {
+                it('[10, 11, 12].should.matchEach(function(it) { return it >= 10', function () {
+                    [10, 11, 12].should.matchEach(function(it) { return it >= 10; });
+                });
+                it('[10, 11, 12].should.matchEach(function(it) { return it >= 10', function () {
+                    [10, 11, 12].should.matchEach(function(it) { return it >= 10; });
+                });
+            });
+            describe('In other cases it checks that each property value is .eql to otherValue', function () {
+                it('[10, 10].should.matchEach(10)', function () {
+                    [10, 10].should.matchEach(10);
+                });
+            });
+        });
     });
 });
