@@ -1,7 +1,7 @@
 var err = require('../util').err;
 var should = require('../../../');
 
-describe.skip('match', function() {
+describe('match', function() {
 
   it('test string match(regexp)', function() {
     'foobar'.should.match(/^foo/);

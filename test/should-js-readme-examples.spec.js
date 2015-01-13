@@ -611,7 +611,7 @@ describe('should.js readme:', function () {
                 [{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep([{b: 'b'}]);
             });
         });
-        describe.skip('.match(otherValue)', function () {
+        describe('.match(otherValue)', function () {
             describe('Given: String, otherValue: regexp', function () {
                 it('username.should.match(/^\w+$/)', function () {
                     var username = 'foo';
