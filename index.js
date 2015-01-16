@@ -30,6 +30,11 @@ should.exist = function (value) { // 'to be null or undefined'
 
 extend(should, ShouldFacade.prototype);
 
+
+should.equal = function (subject, value) {
+	return expect(subject, 'to equal', value);
+};
+
 Object.defineProperty(Object.prototype, 'should', {
     get: function () {
         var value = this;

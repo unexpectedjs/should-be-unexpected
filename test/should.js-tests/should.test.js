@@ -20,11 +20,8 @@ describe('should', function() {
     require('../../').should.equal(should);
   });
 
-  it.skip('test assertion', function() {
+  it('test assertion', function() {
     'test'.should.be.a.string;
-    // This test shows that a subject bleeds in from another
-    // instance. I'm quite amazed that anything works so far when I
-    // discover this so late. I have no idea why...
     should.equal('foo', 'foo');
   });
 
