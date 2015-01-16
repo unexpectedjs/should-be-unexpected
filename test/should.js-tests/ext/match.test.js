@@ -1,7 +1,7 @@
 var err = require('../util').err;
 var should = require('../../../');
 
-describe.skip('match', function() {
+describe('match', function() {
 
   it('test string match(regexp)', function() {
     'foobar'.should.match(/^foo/);
@@ -13,7 +13,7 @@ describe.skip('match', function() {
 
     err(function() {
       'foobar'.should.not.match(/^foo/i)
-    }, "expected 'foobar' not to match /^foo/i");
+    }, "expected 'foobar' not to match /^foo/i\n\nfoobar");
 
     err(function() {
       'foobar'.should.match(/^bar/i, 'foo')
@@ -32,12 +32,21 @@ describe.skip('match', function() {
     // positive false
     err(function() {
       ({ a: 'foo', c: 'barfoo' }).should.not.match(/foo$/);
-    }, "expected { a: 'foo', c: 'barfoo' } not to match /foo$/\n    matched properties: a, c");
+    }, "expected { a: 'foo', c: 'barfoo' } not to satisfy { a: /foo$/, c: /foo$/ }");
+    //}, "expected { a: 'foo', c: 'barfoo' } not to match /foo$/\n    matched properties: a, c");
 
     // negative true
     err(function() {
       ({ a: 'foo', c: 'barfoo' }).should.match(/^foo$/);
-    }, "expected { a: 'foo', c: 'barfoo' } to match /^foo$/\n    not matched properties: c ('barfoo')\n    matched properties: a");
+    }, [
+      "expected { a: 'foo', c: 'barfoo' } to satisfy { a: /^foo$/, c: /^foo$/ }",
+      "",
+      "{",
+      "  a: 'foo',",
+      "  c: 'barfoo' // should match /^foo$/",
+      "}"
+    ].join('\n'));
+    //}, "expected { a: 'foo', c: 'barfoo' } to match /^foo$/\n    not matched properties: c ('barfoo')\n    matched properties: a");
   });
 
   it('test array match(regexp)', function() {
@@ -46,11 +55,23 @@ describe.skip('match', function() {
 
     err(function() {
       ['a', 'b', 'c'].should.not.match(/[a-z]/);
-    }, "expected [ 'a', 'b', 'c' ] not to match /[a-z]/");
+    }, [
+      "failed expectation in [ 'a', 'b', 'c' ]:",
+      "  0: expected 'a' not to match /[a-z]/",
+      "  1: expected 'b' not to match /[a-z]/",
+      "  2: expected 'c' not to match /[a-z]/"
+    ].join('\n'));
+    //}, "expected [ 'a', 'b', 'c' ] not to match /[a-z]/");
 
     err(function() {
       ['a', 'b', 'c'].should.match(/[d-z]/);
-    }, "expected [ 'a', 'b', 'c' ] to match /[d-z]/");
+    }, [
+      "failed expectation in [ 'a', 'b', 'c' ]:",
+      "  0: expected 'a' to match /[d-z]/",
+      "  1: expected 'b' to match /[d-z]/",
+      "  2: expected 'c' to match /[d-z]/"
+    ].join('\n'));
+    //}, "expected [ 'a', 'b', 'c' ] to match /[d-z]/");
   });
 
   it('test match(function)', function() {
