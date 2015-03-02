@@ -12,6 +12,16 @@ Projects whose test suites run with no errors:
 
  - [tj/commander.js](https://github.com/tj/commander.js)@v2.6.0
 
+Projects whose tests are not yet fully running:
+
+[tj/ejs](https://github.com/tj/ejs)@v1.0.0
+Two tests are failing, due to .include and .match not being
+implemented.  .match is at the point in time when these tests are
+written a simple string regex match - now .match is an abomination
+that does all sorts of magic. .include has since been removed from
+should.js. I'm still considering what the right course of action would
+be on this.
+
 ## Incompatabilities
 
 ### 1. .eql(otherValue)
