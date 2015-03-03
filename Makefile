@@ -28,9 +28,7 @@ compatibility-tests/ejs: compatibility-tests
 	git clone https://github.com/tj/ejs.git compatibility-tests/ejs || true
 	cd compatibility-tests/ejs \
 	&& git checkout 1.0.0 \
-	&& sed 's/"should": "\*"/"should": "~3"/' package.json > new_package.json \
-	&& rm package.json \
-	&& mv new_package.json package.json \
+	&& sed 's/"should": "\*"/"should": "~3"/' -i package.json \
 	&& npm install \
 	&& echo "\n\nRUNNING TESTS WITH THE SHIPPED VERSION OF SHOULD.JS\n\n" \
 	&& npm test \
