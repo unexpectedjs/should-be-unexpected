@@ -127,7 +127,7 @@ describe('should.js readme:', function () {
                 // INCOMPATABILITY: SEE DOCUMENTATION
                 expect(function () {
                     [1, 2, 3].should.eql({ '0': 1, '1': 2, '2': 3 });
-                }, 'to throw', "expected [ 1, 2, 3 ] to equal { '0': 1, '1': 2, '2': 3 }\n\nMismatching constructors Array should be Object");
+                }, 'to throw', "expected [ 1, 2, 3 ] to equal { 0: 1, 1: 2, 2: 3 }\n\nMismatching constructors Array should be Object");
             });
             it('.eql does not check object prototypes (!!!)', function () {
                 // INCOMPATABILITY: SEE DOCUMENTATION
@@ -205,7 +205,7 @@ describe('should.js readme:', function () {
             it('.within * ', function () {
                 expect(function () {
                     (3).should.be.within(1,2);
-                }, 'to throw', "expected 3 to be within '1..2'");
+                }, 'to throw', "expected 3 to be within 1..2");
             });
         });
         describe('.approximately(num, delta)', function () {
@@ -408,7 +408,8 @@ describe('should.js readme:', function () {
                 user.should.not.have.property('rawr');
             });
             it("user.should.not.have.property('age', 0)", function () {
-                user.should.not.have.property('age', 0);
+                // user.should.not.have.property('age', 0);
+                // See Incompatabilities in the README
             });
             it("[1, 2].should.have.property('0', 1)", function () {
                 [1, 2].should.have.property('0', 1);
@@ -456,7 +457,8 @@ describe('should.js readme:', function () {
                 user.pets.should.have.a.lengthOf(5);
             });
             it('({ length: 10}).should.have.length(10)', function () {
-                ({ length: 10}).should.have.length(10);
+                // ({ length: 10}).should.have.length(10);
+                // See Incompatabilities in the README
             });
             it(".lengthOf change the chain's object to the given length value", function () {
                 [1,2,3].should.have.length(3).and.be.a.Number;
@@ -464,7 +466,7 @@ describe('should.js readme:', function () {
             it('.length should throw *', function () {
                 expect(function () {
                     user.pets.should.have.length(42);
-                }, 'to throw', "expected [ 'tobi', 'loki', 'jane', 'bandit', 'garfield' ] to have length 42");
+                }, 'to throw', "expected [ 'tobi', 'loki', 'jane', 'bandit', 'garfield' ] to have length 42\n  expected 5 to be 42");
             });
         });
         describe('.ownProperty(str) and .hasOwnProperty(str)', function () {
@@ -489,7 +491,8 @@ describe('should.js readme:', function () {
                 ''.should.be.empty;
             });
             it('({}).should.be.empty', function () {
-                ({}).should.be.empty;
+                // ({}).should.be.empty;
+                // See Incompatabilities in the README
             });
             it('arguments.should.be.empty', function () {
                 (function() {
@@ -558,7 +561,7 @@ describe('should.js readme:', function () {
                 // This fails as contains is not defined for objects in unexpected.
                 expect(function () {
                     ({ b: 10 }).should.containEql({ b: 10 });
-                }, 'to throw', 'The assertion "to contain" is not defined for the type "object",\nbut it is defined for these types: "string", "arrayLike"');
+                }, 'to throw', 'expected { b: 10 } to contain { b: 10 }\n  The assertion "to contain" is not defined for the type "object",\n  but it is defined for these types: "string", "array-like"');
             });
             it('([1, 2, { a: 10 }]).should.containEql({ a: 10 })', function () {
                 ([1, 2, { a: 10 }]).should.containEql({ a: 10 });

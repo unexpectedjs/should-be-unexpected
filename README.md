@@ -51,3 +51,29 @@ The following would work in should.js.
 
 But it doesn't in unexpected, as it does not define the assertion
 'to contain' for the object type.
+
+### 3. .not.property(name, value)
+
+The following would be allowed in should.js.
+
+```javascript
+var user = { name: 'John', age: 42 };
+user.should.not.have.property('age', 0);
+```
+
+Using the not flag with the 'to have property' assertion is not
+working when you provide a value. The reason this was deprectated
+is that we felt that the intention of a test like this is unclear.
+Not using this kind of assertions, will make you write better tests.
+
+### 4: .length
+
+With should.js you could:
+
+```javascript
+({ length: 10}).should.have.length(10);
+```
+
+Unexpected has a type system, and the 'to have length' assertion is
+only defined for string and array like types. Thus this assertion
+will fail, as the subject is not an array nor an arguments-array.
