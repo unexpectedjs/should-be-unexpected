@@ -178,7 +178,7 @@ describe('type', function() {
     (1).should.be.a.Number;
     (new Number(10)).should.be.a.Number;
 
-    NaN.should.be.a.Number;
+    // NaN.should.be.a.Number; - INCOMPATIBILITY: unexpected does not consider NaN a number
     Infinity.should.be.a.Number;
 
     ({}).should.not.be.a.Number;

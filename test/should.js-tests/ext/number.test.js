@@ -49,12 +49,12 @@ describe('number', function() {
 
     err(function(){
       (5).should.not.be.within(4,6);
-    }, "expected 5 not to be within '4..6'");
+    }, "expected 5 not to be within 4..6");
     // }, "expected 5 not to be within 4..6");
 
     err(function(){
       (10).should.be.within(50,100);
-    }, "expected 10 to be within '50..100'");
+    }, "expected 10 to be within 50..100");
     // }, "expected 10 to be within 50..100");
 
     // INCOMPATABILITY: CUSTOM ERROR MESSAGES

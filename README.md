@@ -77,3 +77,25 @@ With should.js you could:
 Unexpected has a type system, and the 'to have length' assertion is
 only defined for string and array like types. Thus this assertion
 will fail, as the subject is not an array nor an arguments-array.
+
+### 5: .empty
+
+```javascript
+({}).should.be.empty;
+```
+
+The above is valid with should. In unexpected, the 'to be empty'
+assertion is only implemented for values of type string or array-like.
+
+### 6: NaN is not a number
+
+```javascript
+NaN.should.be.a.number;
+```
+
+The above assertion will not throw when using should.js. It will when
+you are using unexpected. While javascript itself considers NaN to be a
+number, we could not find a single reason for why you would want your
+assertion framework to consider it a valid number. If you get a NaN,
+where you expected a number, you'll most definitely not get the behaviour
+that you wanted.

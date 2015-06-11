@@ -34,7 +34,7 @@ describe('property', function() {
 
     err(function() {
       'asd'.should.have.property('foo');
-    }, 'The assertion "to have property" is not defined for the type "string",\nbut it is defined for the type "object"');
+    }, 'expected \'asd\' to have property \'foo\'\n  The assertion "to have property" is not defined for the type "string",\n  but it is defined for the type "object"');
     // }, "expected 'asd' to have property foo");
   });
 
@@ -87,11 +87,11 @@ describe('property', function() {
     'test'.should.have.lengthOf(4);
     'test'.should.not.have.length(3);
     [1, 2, 3].should.have.length(3);
-    ({ length: 10}).should.have.length(10);
+    // ({ length: 10}).should.have.length(10); INCOMPATIBLE: to have length only for types array-like and string
 
     err(function() {
       (4).should.have.length(3);
-    }, 'The assertion "to have length" is not defined for the type "number",\nbut it is defined for these types: "string", "object"');
+    }, 'expected 4 to have length 3\n  The assertion "to have length" is not defined for the type "number",\n  but it is defined for these types: "string", "array-like"');
     // }, "expected 4 to have property length");
 
     err(function() {
@@ -133,12 +133,12 @@ describe('property', function() {
 
     err(function() {
       'asd'.should.have.properties('foo');
-    }, 'The assertion "to have properties" is not defined for the type "string",\nbut it is defined for the type "object"');
+    }, 'expected \'asd\' to have properties \'foo\'\n  The assertion "to have properties" is not defined for the type "string",\n  but it is defined for the type "object"');
     // }, "expected 'asd' to have property foo");
 
     err(function() {
       'asd'.should.not.have.properties('length', 'indexOf');
-    }, 'The assertion "not to have properties" is not defined for the type "string",\nbut it is defined for the type "object"');
+    }, 'expected \'asd\' not to have properties [ \'length\', \'indexOf\' ]\n  The assertion "not to have properties" is not defined for the type "string",\n  but it is defined for the type "object"');
     // }, "expected 'asd' not to have properties length, indexOf");
   });
 
@@ -152,7 +152,7 @@ describe('property', function() {
 
     err(function() {
       'asd'.should.have.properties(['foo']);
-    }, 'The assertion "to have properties" is not defined for the type "string",\nbut it is defined for the type "object"');
+    }, 'expected \'asd\' to have properties [ \'foo\' ]\n  The assertion "to have properties" is not defined for the type "string",\n  but it is defined for the type "object"');
     // }, "expected 'asd' to have property foo");
   });
 
@@ -229,21 +229,25 @@ describe('property', function() {
   it('test empty', function() {
     ''.should.be.empty;
     [].should.be.empty;
-    ({}).should.be.empty;
-    ({ length: 10 }).should.not.be.empty;
+    /* INCOMPATIBILITY: only defined for string and array-like
+     * ({}).should.be.empty; 
+     * ({ length: 10 }).should.not.be.empty;
+     */
 
     (function() {
       arguments.should.be.empty;
     })();
 
-    err(function() {
-      ({}).should.not.be.empty;
-    }, 'expected {} not to be empty');
+    /* INCOMPATIBILITY: only defined for string and array-like
+     * err(function() {
+     *   ({}).should.not.be.empty;
+     * }, 'expected {} not to be empty');
+     */
 
-    // !!!!!? INCOMPATIBILITY? or wrong inspection :-(
+    // Incompatibility
     err(function() {
       ({ length: 10 }).should.be.empty;
-    }, 'expected [  ] to be empty');
+    }, 'expected { length: 10 } to be empty\n  The assertion "to be empty" is not defined for the type "object",\n  but it is defined for these types: "string", "array-like"');
     // }, 'expected { length: 10 } to be empty\n    expected { length: 10 } not to have own property length');
 
     err(function() {
