@@ -178,7 +178,7 @@ describe('should.js readme:', function () {
             it('.startWith should fail *', function () {
                 expect(function () {
                     'foobar'.should.not.startWith('foo');
-                }, 'to throw', "expected 'foobar' not to match /^foo/\n\nfoobar");
+                }, 'to throw', "expected 'foobar' not to match /^foo/\n\nfoobar\n^^^");
             });
         });
         describe('.endWith(str)', function () {
@@ -191,7 +191,7 @@ describe('should.js readme:', function () {
             it('.endWith should throw', function () {
                 expect(function () {
                     'foobar'.should.not.endWith('bar');
-                }, 'to throw', 'expected \'foobar\' not to match /bar$/\n\nfoobar');
+                }, 'to throw', 'expected \'foobar\' not to match /bar$/\n\nfoobar\n   ^^^');
             });
         });
         describe('.within(from, to)', function () {
