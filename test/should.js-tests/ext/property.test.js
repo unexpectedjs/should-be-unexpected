@@ -34,7 +34,7 @@ describe('property', function() {
 
     err(function() {
       'asd'.should.have.property('foo');
-    }, 'expected \'asd\' to have property \'foo\'\n  The assertion "to have property" is not defined for the type "string",\n  but it is defined for the type "object"');
+  }, 'expected \'asd\' to have property \'foo\'\n  No matching assertion, did you mean:\n  <object|function> [not] to have property <string>\n  <object|function> to have [own] property <string> <any>');
     // }, "expected 'asd' to have property foo");
   });
 
@@ -91,7 +91,7 @@ describe('property', function() {
 
     err(function() {
       (4).should.have.length(3);
-    }, 'expected 4 to have length 3\n  The assertion "to have length" is not defined for the type "number",\n  but it is defined for these types: "string", "array-like"');
+    }, 'expected 4 to have length 3\n  No matching assertion, did you mean:\n  <string|array-like> [not] to have length <number>');
     // }, "expected 4 to have property length");
 
     err(function() {
@@ -133,12 +133,12 @@ describe('property', function() {
 
     err(function() {
       'asd'.should.have.properties('foo');
-    }, 'expected \'asd\' to have properties \'foo\'\n  The assertion "to have properties" is not defined for the type "string",\n  but it is defined for the type "object"');
+    }, 'expected \'asd\' to have properties \'foo\'\n  No matching assertion, did you mean:\n  <object|function> [not] to have [own] properties <array>\n  <object|function> to have [own] properties <object>');
     // }, "expected 'asd' to have property foo");
 
     err(function() {
       'asd'.should.not.have.properties('length', 'indexOf');
-    }, 'expected \'asd\' not to have properties [ \'length\', \'indexOf\' ]\n  The assertion "not to have properties" is not defined for the type "string",\n  but it is defined for the type "object"');
+    }, 'expected \'asd\' not to have properties [ \'length\', \'indexOf\' ]\n  No matching assertion, did you mean:\n  <object|function> [not] to have [own] properties <array>');
     // }, "expected 'asd' not to have properties length, indexOf");
   });
 
@@ -152,7 +152,7 @@ describe('property', function() {
 
     err(function() {
       'asd'.should.have.properties(['foo']);
-    }, 'expected \'asd\' to have properties [ \'foo\' ]\n  The assertion "to have properties" is not defined for the type "string",\n  but it is defined for the type "object"');
+    }, 'expected \'asd\' to have properties [ \'foo\' ]\n  No matching assertion, did you mean:\n  <object|function> [not] to have [own] properties <array>\n  <object|function> to have [own] properties <object>');
     // }, "expected 'asd' to have property foo");
   });
 
@@ -230,7 +230,7 @@ describe('property', function() {
     ''.should.be.empty;
     [].should.be.empty;
     /* INCOMPATIBILITY: only defined for string and array-like
-     * ({}).should.be.empty; 
+     * ({}).should.be.empty;
      * ({ length: 10 }).should.not.be.empty;
      */
 
