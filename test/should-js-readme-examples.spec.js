@@ -178,7 +178,7 @@ describe('should.js readme:', function () {
             it('.startWith should fail *', function () {
                 expect(function () {
                     'foobar'.should.not.startWith('foo');
-                }, 'to throw', "expected 'foobar' not to match /^foo/\n\nfoobar");
+                }, 'to throw', "expected 'foobar' not to match /^foo/\n\nfoobar\n^^^");
             });
         });
         describe('.endWith(str)', function () {
@@ -191,7 +191,7 @@ describe('should.js readme:', function () {
             it('.endWith should throw', function () {
                 expect(function () {
                     'foobar'.should.not.endWith('bar');
-                }, 'to throw', 'expected \'foobar\' not to match /bar$/\n\nfoobar');
+                }, 'to throw', 'expected \'foobar\' not to match /bar$/\n\nfoobar\n   ^^^');
             });
         });
         describe('.within(from, to)', function () {
@@ -561,7 +561,7 @@ describe('should.js readme:', function () {
                 // This fails as contains is not defined for objects in unexpected.
                 expect(function () {
                     ({ b: 10 }).should.containEql({ b: 10 });
-                }, 'to throw', 'expected { b: 10 } to contain { b: 10 }\n  The assertion "to contain" is not defined for the type "object",\n  but it is defined for these types: "string", "array-like"');
+                }, 'to throw', 'expected { b: 10 } to contain { b: 10 }\n  No matching assertion, did you mean:\n  <array-like> [not] to contain <any+>\n  <string> [not] to contain <string+>');
             });
             it('([1, 2, { a: 10 }]).should.containEql({ a: 10 })', function () {
                 ([1, 2, { a: 10 }]).should.containEql({ a: 10 });

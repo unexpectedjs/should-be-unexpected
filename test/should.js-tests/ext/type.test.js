@@ -32,7 +32,7 @@ describe('type', function() {
     // Incompatibility: Custom error messages
     err(function(){
       'test'.should.not.have.type('string', 'foo');
-    }, "expected 'test' not to be a string 'foo'");
+    }, "expected 'test' not to be a 'string', 'foo'\n  No matching assertion, did you mean:\n  <any> [not] to be (a|an) <function>\n  <any> [not] to be (a|an) <string>\n  <any> [not] to be (a|an) <type>");
     // }, "foo");
 
     err(function(){
@@ -50,7 +50,7 @@ describe('type', function() {
     // Incompatibility: Custom error messages
     err(function(){
       (5).should.not.have.type('number', 'foo');
-    }, "expected 5 not to be a number 'foo'");
+    }, "expected 5 not to be a 'number', 'foo'\n  No matching assertion, did you mean:\n  <any> [not] to be (a|an) <function>\n  <any> [not] to be (a|an) <string>\n  <any> [not] to be (a|an) <type>");
     // }, "foo");
   });
 
@@ -115,7 +115,7 @@ describe('type', function() {
     // Incompatibility: Custom error messages
     err(function(){
       (9).should.an.instanceOf(Foo, 'foo');
-    }, "expected 9 to be a Foo 'foo'");
+    }, "expected 9 to be a function Foo() {}, 'foo'\n  No matching assertion, did you mean:\n  <any> [not] to be (a|an) <function>\n  <any> [not] to be (a|an) <string>\n  <any> [not] to be (a|an) <type>");
     // }, "foo");
 
     function Foo2(){}
