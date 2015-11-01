@@ -247,7 +247,7 @@ describe('property', function() {
     // Incompatibility
     err(function() {
       ({ length: 10 }).should.be.empty;
-    }, 'expected { length: 10 } to be empty\n  The assertion "to be empty" is not defined for the type "object",\n  but it is defined for these types: "string", "array-like"');
+  }, 'expected { length: 10 } to be empty\n  No matching assertion, did you mean:\n  <string|array-like> [not] to be empty');
     // }, 'expected { length: 10 } to be empty\n    expected { length: 10 } not to have own property length');
 
     err(function() {
