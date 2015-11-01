@@ -13,7 +13,7 @@ describe('string', function() {
 
     err(function() {
       'foobar'.should.not.startWith('foo');
-    }, "expected 'foobar' not to match /^foo/\n\nfoobar");
+  }, "expected 'foobar' not to match /^foo/\n\nfoobar\n^^^");
     // }, "expected 'foobar' not to start with 'foo'");
 
     // Incompatibility! Custom Error messages.
@@ -25,7 +25,7 @@ describe('string', function() {
     // Incompatibility! Custom Error messages.
     err(function() {
       'foobar'.should.not.startWith('foo', 'baz');
-    }, "expected 'foobar' not to match /^foo/\n\nfoobar");
+  }, "expected 'foobar' not to match /^foo/\n\nfoobar\n^^^");
     // }, "baz");
   });
 
@@ -40,7 +40,7 @@ describe('string', function() {
 
     err(function() {
       'foobar'.should.not.endWith('bar');
-    }, "expected 'foobar' not to match /bar$/\n\nfoobar");
+  }, "expected 'foobar' not to match /bar$/\n\nfoobar\n   ^^^");
     // }, "expected 'foobar' not to end with 'bar'");
 
     // Incompatibility! Custom Error messages.
@@ -52,7 +52,7 @@ describe('string', function() {
     // Incompatibility! Custom Error messages.
     err(function() {
       'foobar'.should.not.endWith('bar', 'baz');
-    }, "expected 'foobar' not to match /bar$/\n\nfoobar");
+  }, "expected 'foobar' not to match /bar$/\n\nfoobar\n   ^^^");
     // }, "baz");
   });
 
