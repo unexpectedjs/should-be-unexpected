@@ -4,8 +4,9 @@
   "description": "Should.js emulation layer for Unexpected.",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "mocha",
-    "lint": "eslint ."
+    "travis": "npm test && npm run lint"
   },
   "repository": {
     "type": "git",
