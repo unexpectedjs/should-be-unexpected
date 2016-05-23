@@ -1,4 +1,5 @@
 var ShouldFacade = require('./lib/ShouldFacade');
+var AssertFacade = require('./lib/AssertFacade');
 var extend = require('./lib/util/extendObject');
 var expect = require('unexpected');
 
@@ -27,6 +28,7 @@ should.exist = function (value) { // 'to be null or undefined'
     }
 };
 
+extend(should, AssertFacade);
 extend(should, ShouldFacade.prototype);
 
 
